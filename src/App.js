@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+import { ChatBox } from './Components/chat-box/chat-box.component';
 import { NumberInputBox } from './Components/number-input/number-input.component';
 import { Btn } from './Components/btn/btn.component';
 
@@ -12,6 +13,7 @@ class App extends React.Component {
     this.state = {
       total: 0,
       userTurn: true,
+      messages: [],
       isWinner: false,
       computerLogicTrigger: 0,
     };
@@ -28,6 +30,7 @@ class App extends React.Component {
         userTurn: Math.random() >= 0.5,
         isWinner: false,
         computerLogicTrigger: Math.floor(Math.random() * 30 + 36),
+        messages: [],
       },
       () => {
         if (!this.state.userTurn) this.handleMove(this.computerLogic());
@@ -54,7 +57,20 @@ class App extends React.Component {
 
   handleMove = value => {
     console.log(value);
-    let { total, userTurn, isWinner } = this.state;
+    let { total, userTurn, isWinner, messages } = this.state;
+
+    let player;
+    let side;
+
+    if (userTurn) {
+      player = 'You';
+      side = 'right';
+    } else {
+      player = 'The Comp';
+      side = 'left';
+    }
+
+    messages.push({ side, message: `${player} added ${value}!` });
 
     userTurn = !userTurn;
 
@@ -63,7 +79,7 @@ class App extends React.Component {
       isWinner = true;
     } else total += value;
 
-    this.setState({ total, userTurn, isWinner }, () => {
+    this.setState({ total, userTurn, isWinner, messages }, () => {
       if (total === 100) {
         this.state.userTurn // this looks reverse because the user turn was flipped earlier
           ? console.log('You lost')
@@ -92,7 +108,8 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <h1>{this.state.total}</h1>
+        <ChatBox messages={this.state.messages} />
+        <h1>Total: {this.state.total}</h1>
         <NumberInputBox
           placeholder='Your Number'
           handleSubmit={this.handleSubmit}
