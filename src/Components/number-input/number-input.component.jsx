@@ -11,7 +11,7 @@ export const NumberInputBox = ({ placeholder, handleSubmit }) => {
           required
           step='1'
           min='1'
-          max='9'
+          max='10'
           type='number'
           placeholder={placeholder}
         />
