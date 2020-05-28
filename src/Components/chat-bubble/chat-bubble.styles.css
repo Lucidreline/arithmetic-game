@@ -5,20 +5,26 @@
 }
 
 .msg {
-  display: inline-block;
-  margin: 2rem;
-  padding: 0.7rem;
+  padding: 0.9rem;
+  margin: 0.7rem 0;
   border-radius: 13px;
   color: #333;
+  box-shadow: rgba(0, 0, 0, 0.281) -2.5px 2px 5px;
+}
+
+.right {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.left {
+  display: flex;
 }
 
 .right > .msg {
-  float: right;
-  right: 0;
   background-color: #d1fda2;
 }
 
 .left > .msg {
-  left: 0;
   background-color: #fda2d1;
 }
