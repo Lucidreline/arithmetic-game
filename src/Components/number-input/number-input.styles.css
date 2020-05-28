@@ -6,4 +6,18 @@ input[type='number'].number-input::-webkit-inner-spin-button {
 
 input[type='number'].number-input {
   -moz-appearance: textfield;
+  background: none;
+  border: none;
+  border-bottom: #cea2fd 2px solid;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.8rem;
+}
+
+input[type='number']::placeholder {
+  opacity: 9;
+}
+
+button[type='submit'] {
+  margin-left: 2rem;
 }

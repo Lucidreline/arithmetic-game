@@ -15,7 +15,9 @@ export const NumberInputBox = ({ placeholder, handleSubmit }) => {
           type='number'
           placeholder={placeholder}
         />
-        <button type='submit'>Enter</button>
+        <button className='btn pink' type='submit'>
+          Enter
+        </button>
       </form>
     </div>
   );

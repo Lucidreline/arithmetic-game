@@ -87,6 +87,8 @@ class App extends React.Component {
       } else {
         if (!userTurn) this.handleMove(this.computerLogic()); // lets the computer have a turn
       }
+      const chatBox = document.getElementById('chat-box');
+      chatBox.scrollTop = chatBox.scrollHeight; // stays scrolled down to the bottom of the convo
     });
   };
 
@@ -109,12 +111,14 @@ class App extends React.Component {
     return (
       <div className='App'>
         <ChatBox messages={this.state.messages} />
-        <h1>Total: {this.state.total}</h1>
-        <NumberInputBox
-          placeholder='Your Number'
-          handleSubmit={this.handleSubmit}
-        />
-        <Btn placeholder='Reset' handleClick={this.handleReset} />
+        <h1 id='total'>Total: {this.state.total}</h1>
+        <div id='input-section'>
+          <NumberInputBox
+            placeholder='Your Number'
+            handleSubmit={this.handleSubmit}
+          />
+          <Btn placeholder='Reset' handleClick={this.handleReset} />
+        </div>
       </div>
     );
   }

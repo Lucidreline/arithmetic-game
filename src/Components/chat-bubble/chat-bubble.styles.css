@@ -1,0 +1,24 @@
+.chat-bubble {
+  color: white;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.msg {
+  display: inline-block;
+  margin: 2rem;
+  padding: 0.7rem;
+  border-radius: 13px;
+  color: #333;
+}
+
+.right > .msg {
+  float: right;
+  right: 0;
+  background-color: #d1fda2;
+}
+
+.left > .msg {
+  left: 0;
+  background-color: #fda2d1;
+}
