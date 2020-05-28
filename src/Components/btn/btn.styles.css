@@ -29,5 +29,10 @@
 }
 
 #reset-btn {
-  margin-top: 3rem;
+  margin: 1rem auto;
+  display: block;
+}
+
+.reset-btn-container {
+  text-align: center;
 }

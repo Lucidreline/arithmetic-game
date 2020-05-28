@@ -12,8 +12,9 @@ input[type='number'].number-input {
   color: white;
   padding: 0.75rem 2rem;
   font-size: 1.8rem;
-  min-width: 20rem;
+  width: 20rem;
   outline: none;
+  margin-bottom: 1.5rem;
 }
 
 input[type='number']::placeholder {
@@ -21,5 +22,11 @@ input[type='number']::placeholder {
 }
 
 button[type='submit'] {
-  margin-left: 2rem;
+  margin: auto 2.5rem;
+}
+
+.enter-number {
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }

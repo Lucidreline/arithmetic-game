@@ -16,21 +16,57 @@ class App extends React.Component {
       messages: [],
       isWinner: false,
       computerLogicTrigger: 0,
+      firstTry: true,
     };
   }
 
   componentDidMount() {
-    this.handleReset();
+    const side = 'left';
+    const introMessages = [
+      {
+        side,
+        message: 'Welcome to my arithmetic game!',
+      },
+      {
+        side,
+        message: 'Rules are simple.',
+      },
+      {
+        side,
+        message: 'We both choose numbers between 1-10.',
+      },
+      {
+        side,
+        message: 'These values are added to a total.',
+      },
+      {
+        side,
+        message: 'If you can make the total reach 100, you win!',
+      },
+    ];
+    this.setState({ messages: introMessages }, () => this.handleReset());
   }
 
   handleReset = () => {
+    let { firstTry, messages } = this.state;
+    firstTry ? (firstTry = false) : (messages = []); // Keeps the intro message if the game has never been reset
+
+    messages.push({
+      side: 'left',
+      message: "let's flip a coin to see who starts.",
+    });
+    const userTurn = Math.random() >= 0.5;
+    userTurn
+      ? messages.push({ side: 'left', message: 'Heads! You start!' })
+      : messages.push({ side: 'left', message: 'Tails! I start!' });
     this.setState(
       {
         total: 0,
-        userTurn: Math.random() >= 0.5,
+        userTurn,
         isWinner: false,
         computerLogicTrigger: Math.floor(Math.random() * 30 + 36),
-        messages: [],
+        messages,
+        firstTry,
       },
       () => {
         if (!this.state.userTurn) this.handleMove(this.computerLogic());
@@ -56,7 +92,6 @@ class App extends React.Component {
   };
 
   handleMove = value => {
-    console.log(value);
     let { total, userTurn, isWinner, messages } = this.state;
 
     let player;
@@ -72,21 +107,20 @@ class App extends React.Component {
 
     messages.push({ side, message: `${player} added ${value}!` });
 
-    userTurn = !userTurn;
-
     if (total + value >= 100) {
       total = 100; // never lets the total pass 100
       isWinner = true;
+
+      this.state.userTurn // this looks reverse because the user turn was flipped earlier
+        ? messages.push({ side: 'left', message: 'I... I lost... :(' })
+        : messages.push({ side: 'left', message: 'I WIN!!' });
     } else total += value;
 
+    userTurn = !userTurn;
+
     this.setState({ total, userTurn, isWinner, messages }, () => {
-      if (total === 100) {
-        this.state.userTurn // this looks reverse because the user turn was flipped earlier
-          ? console.log('You lost')
-          : console.log('You Have Won');
-      } else {
-        if (!userTurn) this.handleMove(this.computerLogic()); // lets the computer have a turn
-      }
+      if (!userTurn & (total !== 100)) this.handleMove(this.computerLogic()); // lets the computer have a turn
+
       const chatBox = document.getElementById('chat-box');
       chatBox.scrollTop = chatBox.scrollHeight; // stays scrolled down to the bottom of the convo
     });
