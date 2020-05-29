@@ -33,15 +33,19 @@ class App extends React.Component {
       },
       {
         side,
-        message: 'We both choose numbers between 1-10.',
+        message: 'We both choose numbers from 1-10.',
       },
       {
         side,
-        message: 'These values are added to a total.',
+        message: 'These numbers are added to a total.',
       },
       {
         side,
-        message: 'If you can make the total reach 100, you win!',
+        message: 'If the total reaches 100 on your turn, you win!',
+      },
+      {
+        side,
+        message: 'If the total reaches 100 on MY turn, I WIN!',
       },
     ];
     this.setState({ messages: introMessages }, () => this.handleReset());
